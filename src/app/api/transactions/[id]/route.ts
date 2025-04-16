@@ -14,12 +14,12 @@ function handleError(error: Error) {
 // GET /api/transactions/[id]
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectDB();
 
-    const { id } = context.params;
+    const { id } = params;
     const transaction = await Transaction.findById(id);
 
     if (!transaction) {
@@ -35,12 +35,12 @@ export async function GET(
 // PUT /api/transactions/[id]
 export async function PUT(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectDB();
 
-    const { id } = context.params;
+    const { id } = params;
     const data = await request.json();
 
     const transaction = await Transaction.findById(id);
@@ -68,12 +68,12 @@ export async function PUT(
 // DELETE /api/transactions/[id]
 export async function DELETE(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectDB();
 
-    const { id } = context.params;
+    const { id } = params;
     const transaction = await Transaction.findByIdAndDelete(id);
 
     if (!transaction) {
